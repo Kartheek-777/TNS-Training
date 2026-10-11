@@ -1,0 +1,156 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyPOlIJFLCRzofcgB/RKrtHl",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Kartheek-777/TNS-Training/blob/main/NLP%20Basics\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "73cWb5WZBC7O",
+        "outputId": "848f7c9e-f0eb-4153-85ea-bc67ad8b80cf"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Original Text : I Love Solving real World Problems Using DSA Algorithms!\n",
+            "Before Tokenize : I Love Solving real World Problems Using DSA Algorithms!\n",
+            "After Tokenize : ['I', 'Love', 'Solving', 'real', 'World', 'Problems', 'Using', 'DSA', 'Algorithms', '!']\n",
+            "['i', 'love', 'solv', 'real', 'world', 'problem', 'use', 'dsa', 'algorithm', '!']\n"
+          ]
+        },
+        {
+          "output_type": "stream",
+          "name": "stderr",
+          "text": [
+            "[nltk_data] Downloading package punkt to /root/nltk_data...\n",
+            "[nltk_data]   Package punkt is already up-to-date!\n",
+            "[nltk_data] Downloading package punkt_tab to /root/nltk_data...\n",
+            "[nltk_data]   Package punkt_tab is already up-to-date!\n"
+          ]
+        }
+      ],
+      "source": [
+        "import nltk\n",
+        "from nltk.tokenize import word_tokenize\n",
+        "from nltk.stem import PorterStemmer\n",
+        "nltk.download('punkt')\n",
+        "nltk.download('punkt_tab')\n",
+        "\n",
+        "text = \"I Love Solving real World Problems Using DSA Algorithms!\"\n",
+        "\n",
+        "sentences = nltk.sent_tokenize(text)\n",
+        "stemmer = PorterStemmer()\n",
+        "\n",
+        "for sentence in sentences:\n",
+        "   words = word_tokenize(text)\n",
+        "   stemmed_words = [stemmer.stem(word) for word in words]\n",
+        "   print(\"Original Text :\", text)\n",
+        "   print(\"Before Tokenize :\", sentence)\n",
+        "   print(\"After Tokenize :\", words)\n",
+        "   print(stemmed_words)"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import nltk\n",
+        "from nltk.tokenize import word_tokenize\n",
+        "from nltk.stem import PorterStemmer\n",
+        "from nltk.corpus import stopwords # remember to import the stopwords\n",
+        "nltk.download('punkt')\n",
+        "nltk.download('punkt_tab')\n",
+        "nltk.download('stopwords')  # remember to download stopwords\n",
+        "\n",
+        "text = \"I Love Solving real World Problems Using DSA Algorithms!\"\n",
+        "\n",
+        "sentences = nltk.sent_tokenize(text)\n",
+        "stemmer = PorterStemmer()\n",
+        "\n",
+        "stop_words = set(stopwords.words('english'))  # remember to use set\n",
+        "\n",
+        "for sentence in sentences:\n",
+        "   words = word_tokenize(text)\n",
+        "   stemmed_words = [stemmer.stem(word) for word in words]\n",
+        "   words = [word for word in words if word.lower() not in stop_words]  # remember to remove the stopwords by using loop\n",
+        "   print(\"Original Text :\", text)\n",
+        "   print(\"Before Removing StopWords :\", stop_words)\n",
+        "   print(\"After Removing StopWords :\", words)\n",
+        "   print(\"Before Tokenize :\", sentence)\n",
+        "   print(\"After Tokenize :\", words)\n",
+        "   print(stemmed_words)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "rO3gnXUtC0Z_",
+        "outputId": "36cc04c6-42dd-4b28-dada-f20f6d678af5"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Original Text : I Love Solving real World Problems Using DSA Algorithms!\n",
+            "Before Removing StopWords : {'did', 'by', 'when', \"shan't\", 'hasn', 'only', 'each', \"doesn't\", 'not', 'don', 'if', 'because', 'at', 'off', \"he'd\", 'for', \"mustn't\", \"he's\", 'theirs', 'shouldn', 'an', 'our', 'same', 'hadn', 'through', \"you've\", 'does', \"couldn't\", 'has', \"they'd\", 'had', 'whom', 'it', 'about', 'a', \"mightn't\", 'some', 'there', 'and', 'is', 'again', \"they're\", 'didn', 'this', \"i'd\", 'once', 'me', 'the', 'more', 'during', 'she', 'where', 'no', 'aren', 'why', 'those', 'o', 'yourself', \"i've\", \"aren't\", \"she'd\", 'that', 'into', 'doing', 'any', \"don't\", 'very', 'over', 'or', \"should've\", \"it'll\", 'mightn', 'as', \"haven't\", 'other', 'isn', \"wouldn't\", 'won', \"shouldn't\", 'ain', 'then', 'what', 'he', 'down', 'too', \"we've\", \"she's\", 'we', \"we'll\", 'have', 'i', 'doesn', 'their', 'do', \"it's\", 'before', 'can', 'am', \"i'll\", 'll', \"we'd\", \"you're\", 'just', \"he'll\", 'should', \"they've\", 'myself', 'between', 'y', 'these', 'ours', 'd', \"i'm\", 'shan', 'm', 'under', \"that'll\", 'in', \"isn't\", \"it'd\", 'up', 'haven', \"hasn't\", 'themselves', 'own', 'while', 'but', 'now', 'his', 'ourselves', \"she'll\", 'with', 'yourselves', 'most', 'was', 'wouldn', 'after', 'weren', \"won't\", 'so', 'here', \"didn't\", 'them', \"you'll\", \"weren't\", 'on', 'its', 'out', \"they'll\", \"you'd\", 'itself', 'my', 'your', 't', 'from', \"hadn't\", 'be', 'ma', 'her', 'than', 'himself', 'how', 'wasn', \"we're\", 'him', 're', 'will', 'few', 's', 'they', 'who', 'above', 'below', 'you', 'were', 'of', 'both', 'which', 'all', 'are', 'nor', 'couldn', 've', 'yours', 'having', 'been', 'hers', 'against', 'such', 'mustn', 'further', 'to', \"needn't\", \"wasn't\", 'until', 'herself', 'needn', 'being'}\n",
+            "After Removing StopWords : ['Love', 'Solving', 'real', 'World', 'Problems', 'Using', 'DSA', 'Algorithms', '!']\n",
+            "Before Tokenize : I Love Solving real World Problems Using DSA Algorithms!\n",
+            "After Tokenize : ['Love', 'Solving', 'real', 'World', 'Problems', 'Using', 'DSA', 'Algorithms', '!']\n",
+            "['i', 'love', 'solv', 'real', 'world', 'problem', 'use', 'dsa', 'algorithm', '!']\n"
+          ]
+        },
+        {
+          "output_type": "stream",
+          "name": "stderr",
+          "text": [
+            "[nltk_data] Downloading package punkt to /root/nltk_data...\n",
+            "[nltk_data]   Package punkt is already up-to-date!\n",
+            "[nltk_data] Downloading package punkt_tab to /root/nltk_data...\n",
+            "[nltk_data]   Package punkt_tab is already up-to-date!\n",
+            "[nltk_data] Downloading package stopwords to /root/nltk_data...\n",
+            "[nltk_data]   Package stopwords is already up-to-date!\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "lyBGd6PDEvR0"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
